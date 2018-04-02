@@ -1,0 +1,16 @@
+select c.JobID, j.EmailName, 
+LinkContent as FullURL, 
+Case WHEN CHARINDEX('?',LinkContent) > 1 THEN
+    substring(LinkContent, 1, CHARINDEX('?',LinkContent)-1)
+    ELSE
+    LinkContent
+END as LinkContent,
+substring(LinkContent, CHARINDEX('?',LinkContent), LEN(LinkContent)) as LinkContent2, 
+c.SubscriberKey, LinkName
+from _Click c with (NOLOCK)
+join _Job j on c.JobID = j.JobID
+where c.IsUnique = 1
+and c.JobID in (
+    select JobID
+    from [Newsletter KPI Past month])
+and c.LinkContent NOT LIKE '%e-mail.somedomain%'
