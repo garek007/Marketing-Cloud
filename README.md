@@ -25,7 +25,7 @@ We need this to pull all bounces for the past month so we can subtract them from
 
 ## Newsletter Link Clicks from the past month
 This is basically just the _click data view. we use it as an in between table to grab all of our clicks so we can count them later. 
-The query also splits out the url varaibles into columns. \s\s
+The query also splits out the url varaibles into columns.  
 **07 Newsletter Links Clicked Past month.sql** is an overwrite for the table below
 
 ![Third Table](tables/NewsletterLinksClickedPastMonth.JPG)
