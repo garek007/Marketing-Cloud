@@ -19,5 +19,14 @@ Run these with a series of Data Extensions in order to end up with a final conte
 ## Content Bounces Table
 We need this to pull all bounces for the past month so we can subtract them from Sent to get Delivered. It's basically just the _bounce data view.
 
+03 Bounces Past Month.sql is an overwrite for the table below.
 
-![Second Table](tables/ContentBounces.jpg)
+![Second Table](tables/ContentBounces.JPG)
+
+## Newsletter Link Clicks from the past month
+This is basically just the _click data view. we use it as an in between table to grab all of our clicks so we can count them later. The query also splits out the url varaibles into columns.
+07 Newsletter Links Clicked Past month.sql is an overwrite for the table below
+
+![Third Table](tables/NewsletterLinksClickedPastMonth.JPG)
+
+
