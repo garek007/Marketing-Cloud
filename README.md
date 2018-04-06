@@ -15,3 +15,9 @@ Run these with a series of Data Extensions in order to end up with a final conte
 06 Newsletter Unsubscribes Past Month.sql is an update query to the table above
 
 09 Get Market an update query to the table above
+
+## Content Bounces Table
+We need this to pull all bounces for the past month so we can subtract them from Sent to get Delivered. It's basically just the _bounce data view.
+
+
+![Second Table](tables/ContentBounces.jpg)
