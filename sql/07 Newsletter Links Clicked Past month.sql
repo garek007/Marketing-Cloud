@@ -1,4 +1,4 @@
-select c.JobID, j.EmailName, LinkContent as FullURL, 
+select c.JobID, j.EmailName, LinkContent as FullURL,c.EventDate,
 Case WHEN CHARINDEX('?',LinkContent) > 1 THEN
     substring(LinkContent, 1, CHARINDEX('?',LinkContent)-1)
     ELSE
@@ -51,7 +51,7 @@ substring(LinkContent, CHARINDEX('?',LinkContent), LEN(LinkContent)) as LinkCont
       ELSE 'no content position'
     END as LinkPosition,
 
-c.SubscriberKey, LinkName,
+c.SubscriberKey, LinkName,c.IsUnique,
  CHARINDEX('&',LinkContent,CHARINDEX('utm_content=',LinkContent)+12 ) as length
 from _Click c with (NOLOCK)
 join _Job j on c.JobID = j.JobID
@@ -59,3 +59,11 @@ where c.JobID in (
     select JobID
     from [Newsletter KPI Past month])
 and c.LinkContent NOT LIKE '%e-mail.visitorlando%'
+and c.LinkContent NOT LIKE '%planning-kit%'
+and c.LinkContent NOT LIKE '%destination-app%'
+and c.LinkContent NOT LIKE '%privacy-policy%'
+and c.LinkContent NOT LIKE '%visitorlando.com/contact%'
+and c.LinkContent NOT LIKE '%twitter%'
+and c.LinkContent NOT LIKE '%facebook%'
+and c.LinkContent NOT LIKE '%youtube%'
+and c.LinkContent NOT LIKE '%pinterest%'

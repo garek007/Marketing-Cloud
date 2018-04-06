@@ -19,17 +19,16 @@ Run these in order in Automation Studio with a series of Data Extensions to end 
 ## Content Bounces Table
 We need this to pull all bounces for the past month so we can subtract them from Sent to get Delivered. It's basically just the _bounce data view.
 
-03 Bounces Past Month.sql is an overwrite for the table below.
+**03 Bounces Past Month.sql** is an overwrite for the table below.
 
 ![Second Table](tables/ContentBounces.JPG)
 
 ## Newsletter Link Clicks from the past month
-This is basically just the _click data view. we use it as an in between table to grab all of our clicks so we can count them later. 
-<br>The query also splits out the url varaibles into columns.
+This is basically just the _click data view. we use it as an in between table to grab all of our clicks so we can count them later.\s\s
+The query also splits out the url varaibles into columns.
 **07 Newsletter Links Clicked Past month.sql** is an overwrite for the table below
 
 ![Third Table](tables/NewsletterLinksClickedPastMonth.JPG)
-
 
 ## Count up all the total and unique clicks from the past month
 **08 Newsletter Click Totals Past Month** is an overwrite for the table below
@@ -38,5 +37,8 @@ This is basically just the _click data view. we use it as an in between table to
 
 ## Content Report
 The image below shows the structure of the final table you will use for excel, tableau or whatever data processing application you use.
+
+**09 Get Market.sql** Get the market if you have one or feel like it. This is another update on the Newsletter KPI Past Month
+Finally, **10 Put It All Together.sql** Which gathers everything into the table below.
 
 ![Content Report Final Table](tables/ContentReport.JPG)
