@@ -1,6 +1,6 @@
 # Marketing-Cloud-Content-Reporting
 A handful of queries and link tagging approach that will allow you to track content in Salesforce Marketing Cloud
-Run these with a series of Data Extensions in order to end up with a final content report with categories and subcategories.
+Run these in order in Automation Studio with a series of Data Extensions to end up with a final content report with categories and subcategories.
 
 01 Newsletter Opens Past Month.sql is an overwrite query to a table with this structure
 
@@ -30,3 +30,12 @@ This is basically just the _click data view. we use it as an in between table to
 ![Third Table](tables/NewsletterLinksClickedPastMonth.JPG)
 
 
+## Count up all the total and unique clicks from the past month
+
+![Newsletter Click Totals Past Month](tables/NewsletterClickTotalsPastMonth.JPG)
+
+
+## Content Report
+The image below shows the structure of the final table you will use for excel, tableau or whatever data processing application you use.
+
+![Content Report Final Table](tables/ContentReport.JPG)
