@@ -1,0 +1,158 @@
+%%[
+IF NOT EMPTY(@items) Then
+    Set @item1 = Field(Row(@items,@pos1),'ItemNumber')
+    Set @item2 = Field(Row(@items,@pos2),'ItemNumber')
+    Set @item3 = Field(Row(@items,@pos3),'ItemNumber')
+ENDIF
+
+set @Product1Photo = Lookup('Products','image link','id',@item1)
+set @Product2Photo = Lookup('Products','image link','id',@item2)
+set @Product3Photo = Lookup('Products','image link','id',@item3)
+
+set @Item1Name = Lookup('Products','title','id',@item1)
+set @Item2Name = Lookup('Products','title','id',@item2)
+set @Item3Name = Lookup('Products','title','id',@item3)
+
+set @Product1Link = Lookup('Products','link','id',@item1)
+set @Product2Link = Lookup('Products','link','id',@item2)
+set @Product3Link = Lookup('Products','link','id',@item3)
+
+]%%
+
+
+            <table cellspacing="0" cellpadding="0" style="width: 100%;">
+                <tr>
+                    <td>
+                        <table cellspacing="0" cellpadding="0" style="width: 100%;">
+                            <tr>
+                                <!-- Left Cell -->
+                                <td valign="top" class="responsive-td" style="width: 33%; padding-right: 0px;background: #ffffff" >
+
+                                    <table cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;" class="stylingblock-content-wrapper" bgcolor="#ffffff" >
+                                        <tr>
+                                            <td class="stylingblock-content-wrapper camarker-inner">
+                                                <table width="100%" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                        <td align="center">
+                                                            <a href="%%=RedirectTo(@Product1Link)=%%" title="%%=v(@Item1Name)=%%" alias="" conversion="false" data-linkto="other"><img src="%%=v(@Product1Photo)=%%" width="190" style="display: block; padding: 0px; text-align: center; height: auto; width: 100%; border: 0px;"></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%; " class="stylingblock-content-wrapper">
+                                        <tr>
+                                            <td class="stylingblock-content-wrapper camarker-inner">
+                                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                        <td align="center">
+                                                            <table border="0" cellspacing="0" cellpadding="0">
+                                                                <tr>
+
+<td class="innertd buttonblock" style="font-family: arial, helvetica, sans-serif;padding-top:10px;padding-bottom:25px;">
+<a alias="" class="buttonstyles" conversion="false" data-linkto="other" href="%%=RedirectTo(@Product1Link)=%%" style="font-size: 14px; color: #817d77; text-align: center; text-decoration: none; padding: 10px; border-radius: 3px;font-weight:bold;" target="_blank" title=""><span class="title">%%=v(@Item1Name)=%%</span></a><span style="font-size:14px;font-weight:bold;color: #817d77;">>></span>
+</td>
+
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </td>
+                                <!-- Padding Cell -->
+                                <td class="responsive-td"  bgcolor="#ffffff" style="background: #ffffff;padding-left:2px;padding-right: 2px;">
+                                    
+                                </td>
+                                <!-- Middle Cell -->
+                                <td valign="top" class="responsive-td" style="width: 33%; padding-left: 0px; padding-right: 0px;background: #ffffff">
+
+                                    <table cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;" class="stylingblock-content-wrapper" bgcolor="#ffffff" >
+                                        <tr>
+                                            <td class="stylingblock-content-wrapper camarker-inner">
+                                                <table width="100%" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                        <td align="center">
+                                                            <a href="%%=RedirectTo(@Product2Link)=%%" title="%%=v(@Item2Name)=%%" alias="" conversion="false" data-linkto="other"><img src="%%=v(@Product2Photo)=%%" width="190" style="display: block; padding: 0px; text-align: center; height: auto; width: 100%; border: 0px;"></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%; " class="stylingblock-content-wrapper">
+                                        <tr>
+                                            <td class="stylingblock-content-wrapper camarker-inner">
+                                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                        <td align="center">
+                                                            <table border="0" cellspacing="0" cellpadding="0">
+                                                                <tr>
+
+<td class="innertd buttonblock" style="font-family: arial, helvetica, sans-serif;padding-top:10px;padding-bottom:25px;">
+<a alias="" class="buttonstyles" conversion="false" data-linkto="other" href="%%=RedirectTo(@Product2Link)=%%" style="font-size: 14px; color: #817d77; text-align: center; text-decoration: none; padding: 10px; border-radius: 3px;font-weight:bold;" target="_blank" title=""><span class="title">%%=v(@Item2Name)=%%</span></a><span style="font-size:14px;font-weight:bold;color: #817d77;">>></span>
+</td>
+
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </td>
+                                <!-- Padding Cell -->
+                                <td class="responsive-td" bgcolor="#ffffff" style="background: #ffffff;padding-left:2px;padding-right: 2px;">
+                                    
+                                </td>
+
+
+                                <!-- Right Cell -->
+                                <td valign="top" class="responsive-td" style="width: 33%; padding-left: 0px;background: #ffffff" >
+
+                                    <table cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;" class="stylingblock-content-wrapper" bgcolor="#ffffff" >
+                                        <tr>
+                                            <td class="stylingblock-content-wrapper camarker-inner">
+                                                <table width="100%" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                        <td align="center">
+                                                            <a href="%%=RedirectTo(@Product3Link)=%%" title="%%=v(@Item3Name)=%%" alias="" conversion="false" data-linkto="other"><img src="%%=v(@Product3Photo)=%%" width="190" style="display: block; padding: 0px; text-align: center; height: auto; width: 100%; border: 0px;"></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%; " class="stylingblock-content-wrapper">
+                                        <tr>
+                                            <td class="stylingblock-content-wrapper camarker-inner">
+                                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                        <td align="center">
+                                                            <table border="0" cellspacing="0" cellpadding="0">
+                                                                <tr>
+<td class="innertd buttonblock" style="font-family: arial, helvetica, sans-serif;padding-top:10px;padding-bottom:25px;">
+<a alias="" class="buttonstyles" conversion="false" data-linkto="other" href="%%=RedirectTo(@Product3Link)=%%" style="font-size: 14px; color: #817d77; text-align: center; text-decoration: none; padding: 10px; border-radius: 3px;font-weight:bold;" target="_blank" title=""><span class="title">%%=v(@Item3Name)=%%</span></a><span style="font-size:14px;font-weight:bold;color: #817d77;">>></span>
+</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </td>
+
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
