@@ -1,0 +1,15 @@
+SET @getEverythingBeforeFirstUnderscore = Substring(emailName_,Subtract(Length(emailName_),Length(emailName_)),Subtract(IndexOf(emailName_,'_'),1)) /*"welcome" */
+SET @get3charsAfterFirstUnderscore = Substring(emailName_,Add(IndexOf(emailName_,'_'),1),3)
+
+SET @emailname = emailName_ 
+SET @subscriberkey = _subscriberkey
+SET @campaignname = __AdditionalEmailAttribute1 
+SET @listName = _DataSourceName
+
+IF empty(__AdditionalEmailAttribute3) THEN 
+SET @segment = "NA" 
+ELSE 
+SET @segment = __AdditionalEmailAttribute3 
+ENDIF 
+
+SET @utmstring = Concat('utm_source=',emailName_,'&utm_medium=email&utm_campaign=',@campaignname,'&utm_content=')
