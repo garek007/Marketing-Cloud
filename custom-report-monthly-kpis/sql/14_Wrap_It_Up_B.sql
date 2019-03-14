@@ -1,0 +1,2 @@
+SELECT *
+FROM [05_Monthly_KPI_Report_B2C_HELPER]
