@@ -1,9 +1,9 @@
 SELECT *
 FROM _Subscribers
-WHERE EmailAddress NOT IN (
+WHERE SubscriberKey NOT IN (
     SELECT
-    EmailAddress
+    SubscriberKey
     FROM _Open
-    WHERE EventDate >= DATEADD(mm,DATEDIFF(mm,0,GETDATE())-6,0)
+    WHERE EventDate >= DATEADD(dd,DATEDIFF(dd,0,GETDATE())-30,0)
     /*AND EventDate < DATEADD(mm,DATEDIFF(mm,0,GETDATE()),0)*/
 )
