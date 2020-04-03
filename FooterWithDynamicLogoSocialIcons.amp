@@ -1,0 +1,147 @@
+<!-- 
+%%[
+/***************************************************
+This is meant to work with Sender Profiles and a Data Extension. 
+Data Extension should contain your custom links. At send time Sender Profile From Name
+is looked up in Data Extension to find matching values. If no matches are found
+the default is used.
+****************************************************/
+set @replyName = replyname
+
+Set @customSocial = LookupOrderedRows('Social Media Footer Lookup',0,'Sender Profile From Name ASC','Sender Profile From Name',@replyName)
+
+/*Make sure more than  0 rows returned*/
+if RowCount(@customSocial) == 1 Then /* Must be unique */
+
+    Set @row = row(@customSocial,1)
+    if @replyName == Field(@row,"Sender Profile From Name") then
+      
+      Set @logoImg = Field(@row,"Logo")
+      Set @instagram = Field(@row,"Instagram")
+      Set @twitter = Field(@row,"Twitter")
+      Set @facebook = Field(@row,"Facebook")
+      Set @linkedin = Field(@row,"LinkedIn")
+      Set @youtube = Field(@row,"YouTube")
+      Set @extra1 = Field(@row,"Extra1")
+      Set @extra2 = Field(@row,"Extra2")      
+      Set @logoWidth = Field(@row,"LogoWidth")
+     
+    endif
+
+else
+/* If 0 rows returned, then they must not have a custom footer, so we'll use default */
+
+      Set @logoImg = "< Default Logo URL>"
+      Set @instagram = "< Default Instagram URL >"
+      Set @twitter = "< Default Twitter URL >"
+      Set @facebook = "< Default Facebook URL >"
+      Set @linkedin = "< Default LinkedIN URL >"
+      Set @youtube = "< Default YouTube URL >"
+      Set @extra1 = "< Default Additional URL >"
+      Set @extra2 = "< Default Additional URL 2 >"
+      Set @logoWidth = 150
+
+endif
+]%%
+-->
+
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="center">
+
+      <table width="600" class="container" cellspacing="0" cellpadding="0" style="border-top:2px solid #ffbb00;">
+        <tr>
+          <td background="https://image.s11.sfmc-content.com/lib/fe4015717564047b751675/m/1/0d93208b-d2d4-4c61-859c-81cc861bc4c5.gif" style="padding-top:20px; background: url(https://image.s11.sfmc-content.com/lib/fe4015717564047b751675/m/1/0d93208b-d2d4-4c61-859c-81cc861bc4c5.gif) no-repeat;" valign="top" bgcolor="#3c3c3c">
+            
+            <!--[if gte mso 9]>
+            <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:600px;">
+              <v:fill type="tile" src="https://image.s11.sfmc-content.com/lib/fe4015717564047b751675/m/1/0d93208b-d2d4-4c61-859c-81cc861bc4c5.gif" color="#3c3c3c" />
+              <v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0">
+            <![endif]-->
+            <div>
+            <!-- If you want something on the image, insert below this line -->
+
+              <table width="100%">
+                <tr>
+                  <td align="center">
+                    <img width="%%=v(@logoWidth)=%%" src="%%=v(@logoImg)=%%">
+                  </td>
+                </tr>
+              </table>
+
+              <table width="100%" >
+                <tr>
+                  <td align="center">
+
+                    %%[if not empty(@facebook) Then]%%
+                    <a href="%%=v(@facebook)=%%">
+                      <img width="25" style="padding:5px;" src="https://image.s11.sfmc-content.com/lib/fe4015717564047b751675/m/1/ce09c921-32f8-41c1-b495-598a9ae11f18.png">
+                    </a>
+                    %%[endif]%%
+
+                    %%[if not empty(@twitter) Then]%%
+                    <a href="%%=v(@twitter)=%%">
+                      <img width="25" style="padding:5px;" src="https://image.s11.sfmc-content.com/lib/fe4015717564047b751675/m/1/aa751e48-017b-444b-b0d7-635f7fc9bf00.png">
+                    </a>
+                    %%[endif]%%
+
+                    %%[if not empty(@instagram) Then]%%
+                    <a href="%%=v(@instagram)=%%">
+                      <img width="25" style="padding:5px;" src="https://image.s11.sfmc-content.com/lib/fe4015717564047b751675/m/1/b7679724-c89b-4fae-b2c3-1b028f827718.png">
+                    </a>
+                    %%[endif]%%
+
+                    %%[if not empty(@linkedin) Then]%%
+                    <a href="%%=v(@linkedin)=%%">
+                      <img width="25" style="padding:5px;" src="https://image.s11.sfmc-content.com/lib/fe4015717564047b751675/m/1/5be8aeca-155b-4b0f-975f-842b22837ec6.png">
+                    </a>
+                    %%[endif]%%
+
+                    %%[if not empty(@youtube) Then]%%
+                    <a href="%%=v(@youtube)=%%">
+                      <img width="25" style="padding:5px;" src="https://image.s11.sfmc-content.com/lib/fe4015717564047b751675/m/1/adbb1b21-dfa1-44f6-889d-f453302ea911.png">
+                    </a>
+                    %%[endif]%%
+
+                    %%[if not empty(@extra1) Then]%%
+                    <a href="%%=v(@extra1)=%%">
+                      <img width="25" style="padding:5px;" src="">
+                    </a>
+                    %%[endif]%%
+
+                    %%[if not empty(@extra2) Then]%%
+                    <a href="%%=v(@extra2)=%%">
+                      <img width="25" style="padding:5px;" src="">
+                    </a>
+                    %%[endif]%%
+                  </td>
+                </tr>
+
+              </table>  
+
+              <table cellpadding="0" cellspacing="0" width="100%">
+                  <tr>
+                      <td align="center" style="color:#ffffff;padding:0px;">
+                      </td>
+                  </tr>
+
+                  <tr>
+                      <td align="center" style="color:#cccccc;padding:10px 30px 30px;line-height: 125%;">
+                        <a href="%%view_email_url%%" style="color:#ffffff;">View in Browser</a><br>
+                            %%Member_Busname%%, %%Member_Addr%%, %%Member_City%%, %%Member_State%% %%Member_PostalCode%%<br>
+                        <a href="%%profile_center_url%%" style="color:#ffffff;">Update Email Preferences</a>
+                      </td>
+                  </tr>
+              </table>     
+            </div>
+            <!--[if gte mso 9]>
+              </v:textbox>
+            </v:rect>
+            <![endif]-->
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
