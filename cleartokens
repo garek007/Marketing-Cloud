@@ -1,0 +1,23 @@
+list<User> userlist = [SELECT ID, Name FROM User WHERE et4ae5__ExactTargetForAppExchangeUser__c = TRUE];
+for (User i : userlist){
+try {
+string toDelete = i.id;
+et4ae5.supportutilities.deleteusertokens(toDelete, TRUE);
+}
+catch (Exception e) {
+system.debug('Current user ='+i.Name+' Parent Record.');
+}
+}
+et4ae5__Configuration__c[] curconfig = [SELECT ID FROM et4ae5__Configuration__c];
+try {
+delete curconfig;
+}
+catch (Exception e) {
+system.debug('Error Config');
+}
+try {
+et4ae5.supportutilities.deleteusertokens('APIUSER');
+}
+Catch (Exception e) {
+system.debug('API Error');
+}
