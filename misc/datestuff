@@ -8,3 +8,6 @@ SELECT
 ,   DATEDIFF(dd,0,GETDATE())-1 as Date2
 ,   Convert(DateTime, DATEDIFF(DAY, 0, GETDATE())) as Date3
 FROM _Job
+
+Get date without time
+CONVERT(VARCHAR(10), getdate(), 111)
