@@ -1,12 +1,11 @@
 /*
 Still adding to this, but I'm collecting the various date logic.
-The third one will get all records back to midnight on the same day.
 
 */
 SELECT
-    DATEADD(dd,DATEDIFF(dd,0,GETDATE())-1,0) as Date1
-,   DATEDIFF(dd,0,GETDATE())-1 as Date2
-,   Convert(DateTime, DATEDIFF(DAY, 0, GETDATE())) as Date3
+    DATEADD(dd,DATEDIFF(dd,0,GETDATE())-1,0) as Date1/*get all records in past 24 hours*/
+,   DATEDIFF(dd,0,GETDATE())-1 as Date2/*get all records in past 24 hours*/
+,   Convert(DateTime, DATEDIFF(DAY, 0, GETDATE())) as Date3 /* get all records back to midnight on the same day*/
 FROM _Job
 
 Get date without time
