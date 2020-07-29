@@ -6,6 +6,7 @@ SELECT
     DATEADD(dd,DATEDIFF(dd,0,GETDATE())-1,0) as Date1/*get all records in past 1 Day*/
 ,   DATEADD(hh, -24, GETDATE()) as Date2/*get all records in past 24 hours*/
 ,   Convert(DateTime, DATEDIFF(DAY, 0, GETDATE())) as Date3 /* get all records back to midnight on the same day*/
+,   DATEADD(day, -1, GETDATE())/*All records in past 24 hours with time, IE if you run this at 8:52am, you'll get 8:52am the prior day */
 FROM _Job
 
 Get date without time
