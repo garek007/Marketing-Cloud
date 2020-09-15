@@ -11,3 +11,14 @@ FROM _Job
 
 Get date without time
 CONVERT(VARCHAR(10), getdate(), 111)
+
+
+Birthday stuff
+SELECT
+    Id
+,   FirstName
+,   Birthdate
+,   Email
+,   DATEADD(YY, DATEPART(YYYY, GETDATE()) - DATEPART(YYYY,Birthdate), Birthdate) AS "Next Birthday"
+FROM Contact_Salesforce
+WHERE DATEADD(YY, DATEPART(YYYY, GETDATE()) - DATEPART(YYYY,Birthdate), Birthdate) = DATEADD(dd,DATEDIFF(dd,0,GETDATE())+14,0)
