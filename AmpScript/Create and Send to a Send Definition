@@ -1,0 +1,148 @@
+<script runat="server">
+Platform.Load("Core","1.1.1");
+try{
+</script>
+%%[
+
+Set @mid = RequestParameter("mid")
+Set @sc = RequestParameter("sc")
+Set @sp = RequestParameter("sp")
+Set @eid = RequestParameter("emailid")
+
+Set @name = Concat("SFDC Email Resend",format(now(),"yyyyMMddThhmmss"))
+Set @key = Concat("SFDCEmail",format(now(),"yyyyMMddThhmmss"))
+Set @description = "This was created by a button in Salesforce that resends an email to a recipient."
+
+/*SET THE TARGET MID*/
+Set @client = CreateObject("ClientID")
+SetObjectProperty(@client,"ID",@mid)
+SetObjectProperty(@client,"IDSpecified","true")
+
+
+/*CREATE THE DATA EXTENSION*/
+Set @de = CreateObject("DataExtension")
+SetObjectProperty(@de,"Client",@client)/*From the Client object, just above this targets a BU and is also necessary for data retention*/
+
+SetObjectProperty(@de,"Name",@name)
+SetObjectProperty(@de,"CustomerKey",@key)
+SetObjectProperty(@de,"Description",@description)
+SetObjectProperty(@de,"IsSendable","True")
+SetObjectProperty(@de,"IsTestable","False")
+
+/*DE Folder ID
+SetObjectProperty(@de,"CategoryID",@FolderID)*/
+
+Set @deFields = CreateObject("DataExtensionField")
+SetObjectProperty(@deFields,"Name","Id")
+SetObjectProperty(@deFields,"FieldType","Text")
+SetObjectProperty(@deFields,"MaxLength","18")
+AddObjectArrayItem(@de,"Fields",@deFields)
+
+SetObjectProperty(@de,"SendableDataExtensionField",@deFields)
+
+Set @deFields = CreateObject("DataExtensionField")
+SetObjectProperty(@deFields,"Name","Email")
+SetObjectProperty(@deFields,"FieldType","EmailAddress")
+SetObjectProperty(@deFields,"MaxLength","254")
+AddObjectArrayItem(@de,"Fields",@deFields)
+
+
+
+SET @ts_attr = CreateObject("Attribute")
+SetObjectProperty(@ts_attr, "Name", "Subscriber Key")
+SetObjectProperty(@ts_attr, "Value", "Subscriber Key")
+
+SetObjectProperty(@de,"SendableSubscriberField",@ts_attr)
+
+
+/* Data Retention */
+
+SetObjectProperty(@de,"DataRetentionPeriodLength","1")
+SetObjectProperty(@de,"DataRetentionPeriodLengthSpecified","True")
+SetObjectProperty(@de,"DataRetentionPeriodUnitOfMeasure","3")
+
+/*
+                 DataRetentionPeriodUnitOfMeasure     
+                 * 1 = N/A
+                 * 2 = N/A
+                 * 3 = Days
+                 * 4 = Weeks
+                 * 5 = Months
+                 * 6 = Years
+
+*/
+SetObjectProperty(@de,"DataRetentionPeriodUnitOfMeasureSpecified","True")
+SetObjectProperty(@de,"DeleteAtEndOfRetentionPeriod","False")
+SetObjectProperty(@de,"DeleteAtEndOfRetentionPeriodSpecified","False")
+SetObjectProperty(@de,"ResetRetentionPeriodOnImport","False")
+SetObjectProperty(@de,"ResetRetentionPeriodOnImportSpecified","False")
+SetObjectProperty(@de,"RowBasedRetention","False")
+SetObjectProperty(@de,"RowBasedRetentionSpecified","False") 
+
+
+Set @StatCode = InvokeCreate(@de, @StatMessage, @ErrorCode)
+
+Set @insert = InsertData(@name,'Id','something','Email','stan@cloud4good.com')
+
+If @insert > 0 Then
+/*Continue*/
+endif
+
+
+
+/*CREATE THE SEND DEFINITION*/
+Set @sd = CreateObject("EmailSendDefinition")
+SetObjectProperty(@sd,"Client",@client)
+
+SetObjectProperty(@sd,"Name",@name)
+SetObjectProperty(@sd,"CustomerKey",@key)
+SetObjectProperty(@sd,"Description",@description)
+
+Set @sendClassification = CreateObject("SendClassification")
+SetObjectProperty(@sendClassification,"CustomerKey","Default Commercial")
+SetObjectProperty(@sd,"SendClassification",@sendClassification)
+
+Set @senderProfile = CreateObject("SenderProfile")
+SetObjectProperty(@senderProfile,"ObjectID",@sp)
+SetObjectProperty(@sd,"SenderProfile",@senderProfile)
+
+Set @emailID = CreateObject("Email")
+SetObjectProperty(@emailID,"ID",@eid)
+SetObjectProperty(@sd,"Email",@emailID)
+
+Set @targetDE = CreateObject("SendDefinitionList")
+SetObjectProperty(@targetDE,"CustomerKey",@key)
+
+
+SetObjectProperty(@targetDE,"DataSourceTypeID","CustomObject")
+SetObjectProperty(@targetDE,"SendDefinitionListTypeSpecified",1)
+
+
+
+
+
+AddObjectArrayItem(@sd,"SendDefinitionList",@targetDE)
+
+
+]%%
+
+Name: %%=v(@namekey)=%%
+SP: %%=v(@sp)=%%<br>
+SC: %%=v(@sc)=%%<br>
+Email ID: %%=v(@eid)=%%<br>
+MID: %%=v(@mid)=%%
+
+%%[
+
+
+Set @StatCode = InvokeCreate(@sd, @StatMessage, @ErrorCode)
+Set @sendIt = InvokePerform(@sd,"start",@err)
+]%%
+Status = %%=v(@StatMessage)=%% -- %%=v(@ErrorCode)=%%<br>
+Send Status = %%=v(@err)=%%
+<script runat="server">
+  }catch (e) {
+          Write("<b>Error Message:</b> " + e.message + "<br><br><b>Description:</b> " + Stringify(e.description));
+  }
+</script>
+
