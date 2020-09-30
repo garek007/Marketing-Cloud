@@ -2,10 +2,9 @@
 Platform.Load("Core","1.1.1");
 try{
 </script>
+Please wait, this could take a sec...
 %%[
-/*
-Not that we use the Shared Data Extension folder becuase UpdataData can't write to a specific business unit, and I didn't want to have to use the REST api.
-*/
+
 
 Set @mid = IIF(Empty(RequestParameter("mid")),100006781,RequestParameter("mid"))
 Set @sc = RequestParameter("sc")
