@@ -1,0 +1,13 @@
+SELECT
+    Id
+,   FirstName
+,   LastName
+,   DATEADD(YY, DATEPART(YYYY, GETDATE()) - DATEPART(YYYY,PersonBirthdate), PersonBirthdate) as NextBirthday
+,   PersonEmail as Email
+,   Personal_Email__pc
+,   Account_Email__c
+,   PersonBirthdate
+,   DATEADD(dd,DATEDIFF(dd,0,GETDATE()),0) as TodayNotime
+FROM ENT.Account_Salesforce
+WHERE DATEADD(YY, DATEPART(YYYY, GETDATE()) - DATEPART(YYYY,PersonBirthdate), PersonBirthdate) = DATEADD(dd,DATEDIFF(dd,0,GETDATE()),0)
+AND Id IN ('0011Y00003AMA5LQAX','0011Y00002u9X4IQAU','0011Y00002rzu47QAA','001F000000tXxErIAK','001F000001GMsdIIAT','0011Y00003BpvEhQAJ','0011Y00003BqMDQQA3')
